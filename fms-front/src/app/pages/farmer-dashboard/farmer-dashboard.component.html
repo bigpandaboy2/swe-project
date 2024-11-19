@@ -1,0 +1,74 @@
+<div class="p-grid">
+  <div class="p-col-12">
+    <h1 class="mx-auto text-center">Farmer Dashboard</h1>
+  </div>
+
+  <div class="p-col-12">
+    <h2>Your Products</h2>
+    <p-table [value]="products" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5, 10, 20]">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td>{{ product.name }}</td>
+          <td>{{ product.category }}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.quantity }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.status }}</td>
+          <td>
+            <button pButton type="button" icon="pi pi-pencil" class="p-button-warning" (click)="editProduct(product._id)"></button>
+            <button pButton type="button" icon="pi pi-trash" class="p-button-danger" (click)="deleteProduct(product._id)"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <div class="p-col-12">
+    <button pButton type="button" label="Add New Product" icon="pi pi-plus" (click)="showAddProductDialog()"></button>
+  </div>
+
+  <p-dialog header="Add New Product" [(visible)]="addProductDialog" [style]="{width: '450px'}" [modal]="true">
+    <form [formGroup]="productForm" (ngSubmit)="addProduct()">
+      <div class="flex flex-column gap-2">
+
+
+      <div class="p-field flex justify-content-between align-items-center">
+        <label for="name">Name</label>
+        <input id="name" pInputText formControlName="name" />
+      </div>
+      <div class="p-field flex justify-content-between align-items-center">
+        <label for="category">Category</label>
+        <p-dropdown [options]="categories" formControlName="category" id="category" placeholder="Select a category"></p-dropdown>
+      </div>
+      <div class="p-field flex justify-content-between align-items-center">
+        <label for="price">Price</label>
+        <input id="price" pInputText formControlName="price" />
+      </div>
+      <div class="p-field flex justify-content-between align-items-center">
+        <label for="quantity">Quantity</label>
+        <input id="quantity" pInputText formControlName="quantity" />
+      </div>
+      <div class="p-field flex justify-content-between align-items-center">
+        <label for="description">Description</label>
+        <textarea id="description" pInputTextarea formControlName="description"></textarea>
+      </div>
+      <div class="p-field flex justify-content-between align-items-center">
+        <label for="images">Images</label>
+        <input type="file" id="images" (change)="onFileSelect($event)" multiple />
+      </div>
+      <button pButton type="submit" label="Add Product" icon="pi pi-check"></button>
+      </div>
+    </form>
+  </p-dialog>
+</div>

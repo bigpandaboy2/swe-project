@@ -1,0 +1,18 @@
+<div class="p-card xl:w-4 mx-auto">
+  <div>
+    <h1 class="mx-auto text-center pt-4">Login Admin</h1>
+  </div>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="flex flex-column gap-4 pb-4 align-items-center">
+      <div class="flex flex-column gap-2">
+        <input name="email" type="email" formControlName="email" placeholder="Email">
+        <input type="password" formControlName="password" placeholder="Password">
+        <a class="no-underline" [href]="['/reset-password']">Recover password</a>
+      </div>
+
+      <p-button type="submit"  label="Login"></p-button>
+      <p-button label="Register" severity="info"></p-button>
+    </div>
+
+  </form>
+</div>
